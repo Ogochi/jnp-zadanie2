@@ -5,6 +5,10 @@
 #endif
 
 #include <iostream>
+#include <string>
+#include <map>
+
+static unordered_map<int, unordered_map<string, string> > dicts;
 
 unsigned long dict_new();
 
