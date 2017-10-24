@@ -22,4 +22,4 @@ const int MAX_GLOBAL_DICT_SIZE = 42;
 }
 #endif
 
-#endif
+#endif // DICTGLOBAL_H
