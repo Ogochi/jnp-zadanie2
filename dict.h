@@ -28,7 +28,7 @@ void dict_insert(unsigned long id, const char* key, const char* value);
     kontenera unordered_map (plus koszt odnalezienia słownika o danym
     identyfikatorze).
 */
-void dict_remove(uns/home/ogochi/jnp-zadanie2/dict.higned long id, const char* key);
+void dict_remove(unsigned long id, const char* key);
 /*
     Jeżeli istnieje słownik o identyfikatorze id i zawiera klucz key, to usuwa
     klucz oraz wartość związaną z tym kluczem, a w przeciwnym przypadku nic nie
