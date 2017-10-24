@@ -1,3 +1,9 @@
+#ifdef NDEBUG
+  const bool debug = false;
+#else
+  const bool debug = true;
+#endif
+
 #include <iostream>
 
 unsigned long dict_new();
