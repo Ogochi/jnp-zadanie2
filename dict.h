@@ -1,6 +1,10 @@
 #ifndef DICT_H
 #define DICT_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 unsigned long dict_new();
 /*
     Tworzy nowy, pusty słownik i zwraca jego identyfikator.
@@ -49,5 +53,9 @@ void dict_copy(unsigned long src_id, unsigned long dst_id);
     zawartość słownika o identyfikatorze src_id do słownika o identyfikatorze
     dst_id, a w przeciwnym przypadku nic nie robi.
 */
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
