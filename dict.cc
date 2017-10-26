@@ -84,27 +84,13 @@ void dict_clear(unsigned long id) {
 }
 
 void dict_copy(unsigned long src_id, unsigned long dst_id) {
-  DICT dict_to_copy = dicts[src_id];
-  string key_copy, value_copy;
-  for (auto key_value_pair : dict_to_copy) {
-    key_copy =  key_value_pair.first.copy();
-    value_copy = key_value_pair.second.copy();
-    dict_insert(dict_to_copy, key_copy, value_copy);
-  }
-  /*
-  M:nie wiem czy kopiujemy kluczy czy nie
-  czy mamy dac nacisk na leniwy kod jak ten ponizej czy bardziej na taki 
-  zrozumialy jak u gory
+  if (dicts.find(dst_id) != dicts.end() && dst_id != 0 &&
+  	  dicts.find(src_id) != dicts.end() && src_id != 0) {
 
-  alternatywnie
-  for (auto key_value_pair : dict_to_copy) {
-    dict_insert(dict_to_kopy, key_value_pair.first, key_value_pair.second)
+    for (auto key_value_pair : dicts[src_id]) {
+      dict_insert(dst_id, key_value_pair.first.c_str(), key_value_pair.second.c_str());
+    }
   }
-  ------- 
-  B:ja myślę że krótsza wersja jest lepsza, tak naprawdę nie traci na czytelności
-  a wydaje się być zgrabniejsza. Myślę że kopiujemy klucze i wartości, taki jest
-  chyba sens kopiowania mapy żeby dostać dwie niezależne mapy. 
-  */
 }
 
 // co zrobić z powtarzającymi się sprawdzeniami czy dict istnieje
