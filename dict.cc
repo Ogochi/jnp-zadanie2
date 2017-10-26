@@ -24,6 +24,7 @@ unsigned long dict_new() {
   DICT new_dict;
 
   dicts.insert({id_for_new_dict, new_dict});
+  return id_for_new_dict++;
 }
 
 void dict_delete(unsigned long id) {
