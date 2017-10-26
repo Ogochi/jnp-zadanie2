@@ -50,11 +50,6 @@ void dict_insert(unsigned long id, const char* key, const char* value) {
 }
 
 void dict_remove(unsigned long id, const char* key) {
-  /*
-    Jeżeli istnieje słownik o identyfikatorze id i zawiera klucz key, to usuwa
-    klucz oraz wartość związaną z tym kluczem, a w przeciwnym przypadku nic nie
-    robi.
-*/
   auto dictIter = dicts.find(id);
   if (dictIter != dicts.end() && 
       dictIter->second.find(key) != dictIter->second.end()) {
@@ -66,7 +61,6 @@ const char* dict_find(unsigned long id, const char* key) {
   auto dictIter = dicts.find(id);
   string s_key(key);
   
-  // Nie istnieje słownik lub klucz nie istnieje w podanym słowniku.
   if (dictIter == dicts.end() || 
       dictIter->second.find(key) == dictIter->second.end()) {
     auto globalIter = dicts.find(dict_global());
