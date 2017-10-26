@@ -1,14 +1,15 @@
+#include <iostream>
+#include <string>
+#include <unordered_map>
+
 #ifdef NDEBUG
   const bool debug = false;
 #else
   const bool debug = true;
 #endif
 
-#include <iostream>
-#include <string>
-#include <unordered_map>
-
-using namespace std;
+using std::string;
+using std::unordered_map;
 using DICT = unordered_map<string, string>;
 
 static unordered_map<unsigned long, DICT > dicts ( {{0, DICT ()}} );
@@ -80,29 +81,32 @@ void dict_clear(unsigned long id) {
 }
 
 void dict_copy(unsigned long src_id, unsigned long dst_id) {
-	DICT dict_to_copy = dicts[src_id];
-	string key_copy, value_copy;
-	for (auto key_value_pair : dict_to_copy) {
-		key_copy =  key_value_pair.first.copy();
-		value_copy = key_value_pair.second.copy();
-		dict_insert(dict_to_copy, key_copy, value_copy);
-	}
-	/*
-	// nie wiem czy kopiujemy kluczy czy nie
-	// czy mamy dac nacisk na leniwy kod jak ten ponizej czy bardziej na taki 
-	// zrozumialy jak u gory
-	
-	// alternatywnie
-	for (auto key_value_pair : dict_to_copy) {
-		dict_insert(dict_to_kopy, key_value_pair.first, key_value_pair.second)
-	}
-         * 
-         * ja myślę że krótsza wersja jest lepsza, tak naprawdę nie traci na czytelności
-         * a wydaje się być zgrabniejsza. Myślę że kopiujemy klucze i wartości, taki jest
-         * chyba sens kopiowania mapy żeby dostać dwie niezależne mapy. 
-	*/
+  DICT dict_to_copy = dicts[src_id];
+  string key_copy, value_copy;
+  for (auto key_value_pair : dict_to_copy) {
+    key_copy =  key_value_pair.first.copy();
+    value_copy = key_value_pair.second.copy();
+    dict_insert(dict_to_copy, key_copy, value_copy);
+  }
+  /*
+  M:nie wiem czy kopiujemy kluczy czy nie
+  czy mamy dac nacisk na leniwy kod jak ten ponizej czy bardziej na taki 
+  zrozumialy jak u gory
+
+  alternatywnie
+  for (auto key_value_pair : dict_to_copy) {
+    dict_insert(dict_to_kopy, key_value_pair.first, key_value_pair.second)
+  }
+  ------- 
+  B:ja myślę że krótsza wersja jest lepsza, tak naprawdę nie traci na czytelności
+  a wydaje się być zgrabniejsza. Myślę że kopiujemy klucze i wartości, taki jest
+  chyba sens kopiowania mapy żeby dostać dwie niezależne mapy. 
+  */
 }
 
 int main() {
-  // co zrobić z powtarzającymi się sprawdzeniami czy dict istnieje
+  
 }
+
+// co zrobić z powtarzającymi się sprawdzeniami czy dict istnieje
+// Marian: pamiętaj żeby wcięcia robić dwoma spacjami
