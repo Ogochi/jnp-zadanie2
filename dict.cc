@@ -34,13 +34,50 @@ size_t dict_size(unsigned long id) {
     return 0;
 }
 
-void dict_insert(unsigned long id, const char* key, const char* value);
+void dict_insert(unsigned long id, const char* key, const char* value) {
+  if (key == NULL ||  value == NULL)
+    return;
+  auto dict = dicts[id];
+  if (dict == dicts.end())
+    return;
+  dict.insert(make_pair<string,string>(key, value));
+}
 
-void dict_remove(unsigned long id, const char* key);
+void dict_remove(unsigned long id, const char* key) {
+  /*
+    Jeżeli istnieje słownik o identyfikatorze id i zawiera klucz key, to usuwa
+    klucz oraz wartość związaną z tym kluczem, a w przeciwnym przypadku nic nie
+    robi.
+*/
+  auto dict = dicts[id];
+  if (dict != dicts.end() && dict[key] != dict.end()) {
+    dict.erase(key);
+  }
+}
 
-const char* dict_find(unsigned long id, const char* key);
+const char* dict_find(unsigned long id, const char* key) {
+  auto dict = dicts[id];
+  string s_key(key);
+  
+  // Nie istnieje słownik lub klucz nie istnieje w podanym słowniku.
+  if (dict == dicts.end() || dict[s_key] == dict.end()) {
+    auto global = dicts[dict_global()];
+    auto found = global[s_key];
+    if (found == global.end()) 
+      return NULL;
+    else 
+      return found.c_str();
+  } 
+  else {
+    return dict[s_key].c_str();
+  }
+}
 
-void dict_clear(unsigned long id);
+void dict_clear(unsigned long id) {
+  auto dict = dicts[id];
+  if (dict != dicts.end())
+    dict.clear();
+}
 
 void dict_copy(unsigned long src_id, unsigned long dst_id) {
 	DICT dict_to_copy = dicts[src_id];
@@ -59,9 +96,13 @@ void dict_copy(unsigned long src_id, unsigned long dst_id) {
 	for (auto key_value_pair : dict_to_copy) {
 		dict_insert(dict_to_kopy, key_value_pair.first, key_value_pair.second)
 	}
+         * 
+         * ja myślę że krótsza wersja jest lepsza, tak naprawdę nie traci na czytelności
+         * a wydaje się być zgrabniejsza. Myślę że kopiujemy klucze i wartości, taki jest
+         * chyba sens kopiowania mapy żeby dostać dwie niezależne mapy. 
 	*/
 }
 
 int main() {
-
+  // co zrobić z powtarzającymi się sprawdzeniami czy dict istnieje
 }
