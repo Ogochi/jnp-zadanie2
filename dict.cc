@@ -104,9 +104,5 @@ void dict_copy(unsigned long src_id, unsigned long dst_id) {
   */
 }
 
-int main() {
-  
-}
-
 // co zrobić z powtarzającymi się sprawdzeniami czy dict istnieje
 // Marian: pamiętaj żeby wcięcia robić dwoma spacjami
