@@ -85,11 +85,12 @@ void dict_clear(unsigned long id) {
 }
 
 void dict_copy(unsigned long src_id, unsigned long dst_id) {
-  if (dicts.find(dst_id) != dicts.end() && dst_id != 0 &&
-  	  dicts.find(src_id) != dicts.end() && src_id != 0) {
+  if (dicts.find(dst_id) != dicts.end() &&
+  	  dicts.find(src_id) != dicts.end()) {
 
     for (auto key_value_pair : dicts[src_id]) {
-      dict_insert(dst_id, key_value_pair.first.c_str(), key_value_pair.second.c_str());
+      dict_insert(dst_id, key_value_pair.first.c_str(),
+        key_value_pair.second.c_str());
     }
   }
 }
