@@ -47,7 +47,7 @@ void dict_insert(unsigned long id, const char* key, const char* value) {
   auto dictIter = dicts.find(id);
   if (dictIter == dicts.end())
     return;
-  dictIter->second.insert(std::make_pair<string,string>(string(key),
+  dictIter -> second.insert(std::make_pair<string,string>(string(key),
                                                         string(value)));
 }
 
@@ -55,8 +55,8 @@ void dict_remove(unsigned long id, const char* key) {
   auto dictIter = dicts.find(id);
   string s_key(key);
   if (dictIter != dicts.end() &&
-      dictIter->second.find(s_key) != dictIter->second.end()) {
-    dictIter->second.erase(s_key);
+      dictIter -> second.find(s_key) != dictIter -> second.end()) {
+    dictIter -> second.erase(s_key);
   }
 }
 
@@ -65,23 +65,23 @@ const char* dict_find(unsigned long id, const char* key) {
   string s_key(key);
 
   if (dictIter == dicts.end() ||
-      dictIter->second.find(s_key) == dictIter->second.end()) {
+      dictIter -> second.find(s_key) == dictIter -> second.end()) {
     auto globalIter = dicts.find(dict_global());
-    auto foundIter = globalIter->second.find(s_key);
-    if (foundIter == globalIter->second.end())
+    auto foundIter = globalIter -> second.find(s_key);
+    if (foundIter == globalIter -> second.end())
       return NULL;
     else
-      return foundIter->second.c_str();
+      return foundIter -> second.c_str();
   }
   else {
-    return dictIter->second.find(s_key)->second.c_str();
+    return dictIter -> second.find(s_key) -> second.c_str();
   }
 }
 
 void dict_clear(unsigned long id) {
   auto dictIter = dicts.find(id);
   if (dictIter != dicts.end())
-    dictIter->second.clear();
+    dictIter -> second.clear();
 }
 
 void dict_copy(unsigned long src_id, unsigned long dst_id) {
