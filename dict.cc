@@ -28,7 +28,7 @@ unsigned long dict_new() {
 }
 
 void dict_delete(unsigned long id) {
-  if (dicts.find(id) != dicts.end() && id != 0)
+  if (dicts.find(id) != dicts.end() && id != dict_global())
     dicts.erase(id);
 }
 
@@ -47,14 +47,14 @@ void dict_insert(unsigned long id, const char* key, const char* value) {
   auto dictIter = dicts.find(id);
   if (dictIter == dicts.end())
     return;
-  dictIter->second.insert(std::make_pair<string,string>(string(key), 
+  dictIter->second.insert(std::make_pair<string,string>(string(key),
                                                         string(value)));
 }
 
 void dict_remove(unsigned long id, const char* key) {
   auto dictIter = dicts.find(id);
   string s_key(key);
-  if (dictIter != dicts.end() && 
+  if (dictIter != dicts.end() &&
       dictIter->second.find(s_key) != dictIter->second.end()) {
     dictIter->second.erase(s_key);
   }
@@ -63,16 +63,16 @@ void dict_remove(unsigned long id, const char* key) {
 const char* dict_find(unsigned long id, const char* key) {
   auto dictIter = dicts.find(id);
   string s_key(key);
-  
-  if (dictIter == dicts.end() || 
+
+  if (dictIter == dicts.end() ||
       dictIter->second.find(s_key) == dictIter->second.end()) {
     auto globalIter = dicts.find(dict_global());
     auto foundIter = globalIter->second.find(s_key);
-    if (foundIter == globalIter->second.end()) 
+    if (foundIter == globalIter->second.end())
       return NULL;
-    else 
+    else
       return foundIter->second.c_str();
-  } 
+  }
   else {
     return dictIter->second.find(s_key)->second.c_str();
   }

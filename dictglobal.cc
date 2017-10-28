@@ -4,4 +4,8 @@
   const bool debug = true;
 #endif
 
-unsigned long dict_global();
+static const unsigned long GLOBAL_DICT_ID = 0;
+
+unsigned long dict_global() {
+  return GLOBAL_DICT_ID;
+}
