@@ -17,7 +17,7 @@ using std::unordered_map;
 using std::make_pair;
 using DICT = unordered_map<string, string>;
 
-static unordered_map<unsigned long, DICT > dicts ( {{0, DICT ()}} );
+static unordered_map<unsigned long, DICT > dicts ( {{dict_global(), DICT ()}} );
 static unsigned long id_for_new_dict = 1;
 
 unsigned long dict_new() {
