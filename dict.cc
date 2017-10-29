@@ -28,6 +28,8 @@ unsigned long dict_new() {
 }
 
 void dict_delete(unsigned long id) {
+  if (id == dict_global()) 
+    return;
   if (dicts.find(id) != dicts.end() && id != dict_global())
     dicts.erase(id);
 }
@@ -43,6 +45,8 @@ size_t dict_size(unsigned long id) {
 
 void dict_insert(unsigned long id, const char* key, const char* value) {
   if (key == NULL ||  value == NULL)
+    return;
+  if (id == dict_global() && dicts[dict_global()].size() > MAX_GLOBAL_DICT_SIZE)
     return;
   auto dictIter = dicts.find(id);
   if (dictIter == dicts.end())
