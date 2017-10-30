@@ -17,7 +17,7 @@ using std::unordered_map;
 using std::make_pair;
 using DICT = unordered_map<string, string>;
 
-static unordered_map<unsigned long, DICT > dicts ( {{0, DICT ()}} );
+static unordered_map<unsigned long, DICT > dicts ( {{dict_global(), DICT ()}} );
 static unsigned long id_for_new_dict = 1;
 
 unsigned long dict_new() {
@@ -87,9 +87,14 @@ void dict_insert(unsigned long id, const char* key, const char* value) {
 
   if (key == NULL ||  value == NULL) {
     if(debug)
-      cerr << "dict_inset: attempt to insert to dict " << id << "NULL key or value\n";
+      cerr << "dict_insert: attempt to insert to dict " << id << "NULL key or value\n";
 
     return;
+  if (id == dict_global() && dicts[dict_global()].size() == MAX_GLOBAL_DICT_SIZE) {
+    if(debug)
+      cerr << "dict_insert: attempt to make Global Dict size exceed its max size\n";
+
+      return;
   }
 
   auto dictIter = dicts.find(id);
