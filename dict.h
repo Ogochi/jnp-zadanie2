@@ -14,7 +14,7 @@ void dict_delete(unsigned long id);
     Jeżeli istnieje słownik o identyfikatorze id, usuwa go, a w przeciwnym
     przypadku nic nie robi.
 */
-std::size_t dict_size(unsigned long id);
+size_t dict_size(unsigned long id);
 /*
     Jeżeli istnieje słownik o identyfikatorze id, zwraca liczbę jej
     elementów, a w przeciwnym przypadku zwraca 0.
