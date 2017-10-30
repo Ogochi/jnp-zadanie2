@@ -217,11 +217,15 @@ void dict_copy(unsigned long src_id, unsigned long dst_id) {
   if (debug)
     cerr << "dict_copy(" << src_id << ", " << dst_id << ")\n";
 
-  if (dicts().find(dst_id) != dicts().end()) { //!!! nie wykonywac dict_insert spamietac find
-  	if (dicts().find(src_id) != dicts().end()) {
-      for (auto key_value_pair : dicts()[src_id]) {
-        dict_insert(dst_id, key_value_pair.first.c_str(),
-          key_value_pair.second.c_str());
+  auto dst_dict = dicts().find(dst_id), src_dict = dicts().find(src_id);
+
+  if (dst_dict != dicts().end()) {
+    bool not_enough_space = (src_id = 0 && (dst_dict -> second.size() +
+    src_dict -> second.size() > MAX_GLOBAL_DICT_SIZE));
+  	if (src_dict != dicts().end() || !not_enough_space) {
+      for (auto key_value_pair : src_dict -> second) {
+        dst_dict -> second.insert(make_pair<string,string>(
+          string(key_value_pair.first), string(key_value_pair.second)));
       }
 
       if (debug) {
