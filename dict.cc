@@ -21,34 +21,94 @@ static unordered_map<unsigned long, DICT > dicts ( {{0, DICT ()}} );
 static unsigned long id_for_new_dict = 1;
 
 unsigned long dict_new() {
+  if(debug)
+    cerr << "dict_new()\n";
+
   DICT new_dict;
 
   dicts.insert({id_for_new_dict, new_dict});
-  return id_for_new_dict++;
+
+  if(debug)
+    cerr << "dict_new: dict " << id_for_new_dict << " has been created\n";
+
+  id_for_new_dict++;
+
+  return id_for_new_dict;
 }
 
 void dict_delete(unsigned long id) {
-  if (dicts.find(id) != dicts.end() && id != dict_global())
-    dicts.erase(id);
+  if(debug)
+    cerr << "dict_delete(" << id << ")\n";
+
+  if (dicts.find(id) != dicts.end()) {
+    if(id != dict_global()) {
+      if(debug)
+        cerr << "dict_delete: dict " << id << "has been deleted\n";
+
+      dicts.erase(id);
+    }
+    else if(debuf) {
+      cerr << "dict_delete: attempt to delete Global Dict\n";
+    }
+
+  }
+  else if (debug) {
+    cerr << "dict_delete: dict " << id << "not found\n";
+  }
+
+
 }
 
 size_t dict_size(unsigned long id) {
-  unordered_map<unsigned long, DICT >::iterator it = dicts.find(id);
+  if(debug)
+    cerr << "dict_size(" << id << ")\n";
 
-  if (it != dicts.end())
+  auto it = dicts.find(id);
+
+  if (it != dicts.end()) {
+    if(debug) {
+      cerr << "dict_size: dict " << id << "contains ";
+      cerr << (it -> second).size() << " elements\n";
+    }
+
     return (it -> second).size();
-  else
+  }
+  else {
+    if(debug)
+      cerr << "dict_size: dict with id " << id << "doesn't exist\n";
+
     return 0;
+  }
 }
 
 void dict_insert(unsigned long id, const char* key, const char* value) {
-  if (key == NULL ||  value == NULL)
+  if(debug)
+    cerr << "dict_insert(" << id << ", " << string(key) << ", " << string(value) "\n";
+
+  if (key == NULL ||  value == NULL) {
+    if(debug)
+      cerr << "dict_inset: attempt to insert to dict " << id << "NULL key or value\n";
+
     return;
+  }
+
   auto dictIter = dicts.find(id);
-  if (dictIter == dicts.end())
-    return;
-  dictIter -> second.insert(std::make_pair<string,string>(string(key),
-                                                        string(value)));
+  if (dictIter != dicts.end()) {
+    dictIter -> second.insert(std::make_pair<string,string>(string(key),
+                                                          string(value)));
+
+    if(debug) {
+      cerr << "dict_insert: dict " << id << ", the pair (" << key << ", " << value;
+      cerr << " has been added\n";
+    }
+  }
+  else {
+    if(debug)
+      cerr << "dict_insert: dict " << id << " not found\n";
+  }
+
+
+
 }
 
 void dict_remove(unsigned long id, const char* key) {
