@@ -10,6 +10,7 @@ unsigned long dict_global();
     Zwraca identyfikator globalnego słownika, którego nie można usunąć.
 */
 
+// nie int!!!
 const int MAX_GLOBAL_DICT_SIZE = 42;
 /*
     Stała określa maksymalny rozmiar globalnego słownika.

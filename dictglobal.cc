@@ -1,19 +1,8 @@
-#ifdef NDEBUG
-  const bool debug = false;
-#else
-  const bool debug = true;
-#endif
+#include "dictglobal.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
+// komentarz do create new ze sie nie naklada na globala
 static const unsigned long GLOBAL_DICT_ID = 0;
 
 unsigned long dict_global() {
   return GLOBAL_DICT_ID;
 }
-
-#ifdef __cplusplus
-}
-#endif

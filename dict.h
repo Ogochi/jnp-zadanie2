@@ -2,8 +2,16 @@
 #define DICT_H
 
 #ifdef __cplusplus
+#include <cstddef>
+#else
+#include <stddef.h>
+#endif
+
+#ifdef __cplusplus
 extern "C" {
 #endif
+
+// namespace jnp1
 
 unsigned long dict_new();
 /*
