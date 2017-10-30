@@ -83,7 +83,7 @@ size_t dict_size(unsigned long id) {
 
 void dict_insert(unsigned long id, const char* key, const char* value) {
   if(debug)
-    cerr << "dict_insert(" << id << ", " << string(key) << ", " << string(value) "\n";
+    cerr << "dict_insert(" << id << ", " << string(key) << ", " << string(value) ")\n";
 
   if (key == NULL ||  value == NULL) {
     if(debug)
@@ -103,8 +103,8 @@ void dict_insert(unsigned long id, const char* key, const char* value) {
                                                           string(value)));
 
     if(debug) {
-      cerr << "dict_insert: dict " << id << ", the pair (" << key << ", " << value;
-      cerr << " has been added\n";
+      cerr << "dict_insert: dict " << id << ", the pair (" << string(key);
+      cerr << ", " << string(value) << " has been added\n";
     }
   }
   else {
@@ -117,11 +117,27 @@ void dict_insert(unsigned long id, const char* key, const char* value) {
 }
 
 void dict_remove(unsigned long id, const char* key) {
+  if(debug)
+    cerr << "dict_remove(" << id << ", " << string(key) << ")\n";
+
   auto dictIter = dicts.find(id);
   string s_key(key);
-  if (dictIter != dicts.end() &&
-      dictIter -> second.find(s_key) != dictIter -> second.end()) {
-    dictIter -> second.erase(s_key);
+
+  if (dictIter != dicts.end()) {
+    if(dictIter -> second.find(s_key) != dictIter -> second.end()) {
+      dictIter -> second.erase(s_key);
+
+      if(debug) {
+        cerr << "dict_remove: dict " << id << ", key " << string(key);
+        cerr << " has been removed\n";
+      }
+    }
+    else if (debug) [
+      cerr << "dict_remove: dict " << id << ", key " << string(key) << " not found\n";
+    ]
+  }
+  else if (debug) {
+    cerr << "dict_remove: dict " << id << " not found\n";
   }
 }
 
@@ -145,6 +161,7 @@ const char* dict_find(unsigned long id, const char* key) {
 
 void dict_clear(unsigned long id) {
   auto dictIter = dicts.find(id);
+
   if (dictIter != dicts.end())
     dictIter -> second.clear();
 }
