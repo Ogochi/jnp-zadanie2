@@ -22,14 +22,14 @@ static unsigned long id_for_new_dict = 1;
 
 unsigned long dict_new() {
   if(debug)
-    cerr << "dict_new()\n";
+    std::cerr << "dict_new()\n";
 
   DICT new_dict;
 
   dicts.insert({id_for_new_dict, new_dict});
 
   if(debug)
-    cerr << "dict_new: dict " << id_for_new_dict << " has been created\n";
+    std::cerr << "dict_new: dict " << id_for_new_dict << " has been created\n";
 
   id_for_new_dict++;
 
@@ -38,22 +38,22 @@ unsigned long dict_new() {
 
 void dict_delete(unsigned long id) {
   if(debug)
-    cerr << "dict_delete(" << id << ")\n";
+    std::cerr << "dict_delete(" << id << ")\n";
 
   if (dicts.find(id) != dicts.end()) {
     if(id != dict_global()) {
       if(debug)
-        cerr << "dict_delete: dict " << id << "has been deleted\n";
+        std::cerr << "dict_delete: dict " << id << "has been deleted\n";
 
       dicts.erase(id);
     }
-    else if(debuf) {
-      cerr << "dict_delete: attempt to delete Global Dict\n";
+    else if(debug) {
+      std::cerr << "dict_delete: attempt to delete Global Dict\n";
     }
 
   }
   else if (debug) {
-    cerr << "dict_delete: dict " << id << "not found\n";
+    std::cerr << "dict_delete: dict " << id << "not found\n";
   }
 
 
@@ -61,38 +61,42 @@ void dict_delete(unsigned long id) {
 
 size_t dict_size(unsigned long id) {
   if(debug)
-    cerr << "dict_size(" << id << ")\n";
+    std::cerr << "dict_size(" << id << ")\n";
 
   auto it = dicts.find(id);
 
   if (it != dicts.end()) {
     if(debug) {
-      cerr << "dict_size: dict " << id << "contains ";
-      cerr << (it -> second).size() << " elements\n";
+      std::cerr << "dict_size: dict " << id << "contains ";
+      std::cerr << (it -> second).size() << " elements\n";
     }
 
     return (it -> second).size();
   }
   else {
     if(debug)
-      cerr << "dict_size: dict with id " << id << "doesn't exist\n";
+      std::cerr << "dict_size: dict with id " << id << "doesn't exist\n";
 
     return 0;
   }
 }
 
 void dict_insert(unsigned long id, const char* key, const char* value) {
-  if(debug)
-    cerr << "dict_insert(" << id << ", " << string(key) << ", " << string(value) ")\n";
+  if(debug) {
+    std::cerr << "dict_insert(" << id << ", " << string(key) << ", ";
+    std::cerr << string(value) << ")\n";
+  }
 
   if (key == NULL ||  value == NULL) {
     if(debug)
-      cerr << "dict_insert: attempt to insert to dict " << id << "NULL key or value\n";
+      std::cerr << "dict_insert: attempt to insert to dict " << id << "NULL key or value\n";
 
     return;
+  }
+  
   if (id == dict_global() && dicts[dict_global()].size() == MAX_GLOBAL_DICT_SIZE) {
     if(debug)
-      cerr << "dict_insert: attempt to make Global Dict size exceed its max size\n";
+      std::cerr << "dict_insert: attempt to make Global Dict size exceed its max size\n";
 
       return;
   }
@@ -103,22 +107,19 @@ void dict_insert(unsigned long id, const char* key, const char* value) {
                                                           string(value)));
 
     if(debug) {
-      cerr << "dict_insert: dict " << id << ", the pair (" << string(key);
-      cerr << ", " << string(value) << " has been added\n";
+      std::cerr << "dict_insert: dict " << id << ", the pair (" << string(key);
+      std::cerr << ", " << string(value) << " has been added\n";
     }
   }
   else {
     if(debug)
-      cerr << "dict_insert: dict " << id << " not found\n";
+      std::cerr << "dict_insert: dict " << id << " not found\n";
   }
-
-
-
 }
 
 void dict_remove(unsigned long id, const char* key) {
   if(debug)
-    cerr << "dict_remove(" << id << ", " << string(key) << ")\n";
+    std::cerr << "dict_remove(" << id << ", " << string(key) << ")\n";
 
   auto dictIter = dicts.find(id);
   string s_key(key);
@@ -128,16 +129,16 @@ void dict_remove(unsigned long id, const char* key) {
       dictIter -> second.erase(s_key);
 
       if(debug) {
-        cerr << "dict_remove: dict " << id << ", key " << string(key);
-        cerr << " has been removed\n";
+        std::cerr << "dict_remove: dict " << id << ", key " << string(key);
+        std::cerr << " has been removed\n";
       }
     }
-    else if (debug) [
-      cerr << "dict_remove: dict " << id << ", key " << string(key) << " not found\n";
-    ]
+    else if (debug) {
+      std::cerr << "dict_remove: dict " << id << ", key " << string(key) << " not found\n";
+    }
   }
   else if (debug) {
-    cerr << "dict_remove: dict " << id << " not found\n";
+    std::cerr << "dict_remove: dict " << id << " not found\n";
   }
 }
 
