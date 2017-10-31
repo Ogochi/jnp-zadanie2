@@ -9,10 +9,10 @@
 #endif
 
 #ifdef __cplusplus
-namespace jnp1 { 
-extern "C" { // CZY TU POWINNY BYĆ JAKIEŚ WCIĘCIA?
+namespace jnp1 {
+extern "C" { //TODO CZY TU POWINNY BYĆ JAKIEŚ WCIĘCIA?
 #endif
-  
+
 unsigned long dict_new();
 /*
     Tworzy nowy, pusty słownik i zwraca jego identyfikator.
@@ -59,8 +59,12 @@ void dict_copy(unsigned long src_id, unsigned long dst_id);
 /*
     Jeżeli istnieją słowniki o identyfikatorach src_id oraz dst_id, to kopiuje
     zawartość słownika o identyfikatorze src_id do słownika o identyfikatorze
-    dst_id, a w przeciwnym przypadku nic nie robi. 
- DOPISAĆ CO ZE SŁOWNIKIEM GLOBALNYM
+    dst_id, a w przeciwnym przypadku nic nie robi.
+    Kopiowanie odbywa się w nastepujący sposób:
+    -- nadpisywane są rekordy o tych samych kluczach
+    -- gdy mamy do czynienia ze słownikiem globalnym to jest on traktowany jak
+       zwykly słównik, jedynie, żadne zmiany nie zostaną dokonane, gdy jego
+       rozmiar może przepelnic maksymalnie dozwolony
 */
 
 #ifdef __cplusplus

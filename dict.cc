@@ -18,10 +18,16 @@ using std::string;
 using std::unordered_map;
 using std::make_pair;
 using std::cerr;
+
+/*
+ * Typ danych reprezentujacy słownik czyli mape o kluczach typu string oraz
+ * wartościach typu string
+ */
 using dict_t = unordered_map<string, string>;
 
 namespace jnp1 {
   unordered_map<unsigned long, dict_t>& dicts() {
+    //TODO czy warto tu spacje po dicts ???
     static unordered_map<unsigned long, dict_t> dicts ( {{dict_global(), dict_t()}} );
     return dicts;
   }
@@ -93,14 +99,17 @@ namespace jnp1 {
 
     if (key == NULL ||  value == NULL) {
       if (debug)
-        cerr << "dict_insert: attempt to insert to dict " << id << " NULL key or value\n";
+        cerr << "dict_insert: attempt to insert to dict " << id 
+             << " NULL key or value\n";
 
       return;
     }
 
-    if (id == dict_global() && dicts()[dict_global()].size() == MAX_GLOBAL_DICT_SIZE) {
+    if (id == dict_global() &&
+        dicts()[dict_global()].size() == MAX_GLOBAL_DICT_SIZE) {
       if(debug)
-        cerr << "dict_insert: attempt to make Global Dict size exceed its max size\n";
+        cerr << "dict_insert: attempt to make Global Dict size"
+             << "exceed its max size\n";
 
         return;
     }
@@ -138,7 +147,8 @@ namespace jnp1 {
         }
       }
       else if (debug) {
-        cerr << "dict_remove: dict " << id << ", key " << string(key) << " not found\n";
+        cerr << "dict_remove: dict " << id << ", key " << string(key) 
+             << " not found\n";
       }
     }
     else if (debug) {
@@ -188,8 +198,9 @@ namespace jnp1 {
     }
     else {
       if (debug) {
-        cerr << "dict_find: key " << string(key)
-             << " in the Global Dictionary has value " << foundIter -> second << "\n";
+        //TODO jak to przeniesc???
+        cerr << "dict_find: key " << string(key) << " in the Global Dictionary"
+             << " has value " << foundIter -> second << "\n";
       }
 
       return foundIter -> second.c_str();
@@ -220,10 +231,21 @@ namespace jnp1 {
     auto dst_dict = dicts().find(dst_id), src_dict = dicts().find(src_id);
 
     if (dst_dict != dicts().end()) {
+      // TODO czy 80 to max przeciez tu to jedynie 2 symbole ktore nie wolno osobno przeniesc, a jak przeniesiemy to mniej czytelne
+      /*
+       * zmienna logiczna ktora słuzy do sprawdzenia warunku przy kopiowaniu do
+       * słownika globalnego, dba o nieprzepelnienie słownika globalnego
+       */
       bool not_enough_space = (src_id = 0 && (dst_dict -> second.size() +
-      src_dict -> second.size() > MAX_GLOBAL_DICT_SIZE));
-          if (src_dict != dicts().end() || !not_enough_space) {
+                               src_dict -> second.size() > MAX_GLOBAL_DICT_SIZE));
+      // nie kopiujemy gdy slownik sie nie zmiesci
+      if (src_dict != dicts().end() || !not_enough_space) {
         for (auto key_value_pair : src_dict -> second) {
+          /*
+           * nie uzywamy funkcji dict_insert gdyz, spowoduje to ponowne
+           * wyszukanie iteratora, co skutkuje pogorszeniem efektywnosci kodu
+           */
+          // TODO jak to mam przeniesc ??? czy tak jest ok??
           dst_dict -> second.insert(make_pair<string,string>(
             string(key_value_pair.first), string(key_value_pair.second)));
         }

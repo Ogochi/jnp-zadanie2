@@ -15,3 +15,7 @@
 # All
 - komentarze do swoich funkcji(o ile trzeba)
 - potem odpalic testy z fb
+- Marian: dodalem kilka TODO rzeczy i odrazu zaproponowalem swoje sugestie jak je rozwiazac
+- niektore z nich sa w waszych funkcjach, zasugerujcie rozwiazanie kwestii stylu
+- MA BYC SPOJNY KOD
+- PS: mi sie bardzo podoba :)
