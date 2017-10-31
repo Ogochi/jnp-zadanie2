@@ -2,6 +2,7 @@
 #define DICTGLOBAL_H
 
 #ifdef __cplusplus
+namespace jnp1 {
 extern "C" {
 #endif
 
@@ -20,7 +21,8 @@ const int MAX_GLOBAL_DICT_SIZE = 42;
 */
 
 #ifdef __cplusplus
-}
+} // extern "C"
+} // namespace jnp1
 #endif
 
 #endif // DICTGLOBAL_H

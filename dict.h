@@ -3,16 +3,16 @@
 
 #ifdef __cplusplus
 #include <cstddef>
+#include <iostream>
 #else
 #include <stddef.h>
 #endif
 
 #ifdef __cplusplus
-extern "C" {
+namespace jnp1 { 
+extern "C" { // CZY TU POWINNY BYĆ JAKIEŚ WCIĘCIA?
 #endif
-
-// namespace jnp1
-
+  
 unsigned long dict_new();
 /*
     Tworzy nowy, pusty słownik i zwraca jego identyfikator.
@@ -59,11 +59,13 @@ void dict_copy(unsigned long src_id, unsigned long dst_id);
 /*
     Jeżeli istnieją słowniki o identyfikatorach src_id oraz dst_id, to kopiuje
     zawartość słownika o identyfikatorze src_id do słownika o identyfikatorze
-    dst_id, a w przeciwnym przypadku nic nie robi.
+    dst_id, a w przeciwnym przypadku nic nie robi. 
+ DOPISAĆ CO ZE SŁOWNIKIEM GLOBALNYM
 */
 
 #ifdef __cplusplus
-}
+} // extern "C"
+} // namespace jnp1
 #endif
 
-#endif
+#endif // DICT_H
