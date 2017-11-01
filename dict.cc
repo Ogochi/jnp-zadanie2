@@ -30,13 +30,16 @@ namespace jnp1 {
     static unordered_map<unsigned long, dict_t> dicts( {{dict_global(), dict_t()}} );
     return dicts;
   }
-  
+
   unsigned long dict_new() {
     static unsigned long id_for_new_dict = 1;
 
     if (debug)
       cerr << "dict_new()\n";
-
+    /*
+     * Sprawdzamy, czy id_for_new_dict nie przekroczyło maksymalnej wartości dla
+     * unsigned long
+     */
     assert(id_for_new_dict != 0);
 
     dicts().insert({id_for_new_dict, dict_t()});
@@ -131,6 +134,8 @@ namespace jnp1 {
   }
 
   void dict_remove(unsigned long id, const char* key) {
+    assert(key != NULL);
+
     if (debug)
       cerr << "dict_remove(" << id << ", " << string(key) << ")\n";
 
@@ -157,6 +162,8 @@ namespace jnp1 {
   }
 
   const char* dict_find(unsigned long id, const char* key) {
+    assert(key != NULL);
+
     if (debug)
       cerr << "dict_find(" << id << ", " << string(key) << ")\n";
 
