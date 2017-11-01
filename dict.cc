@@ -27,10 +27,10 @@ using dict_t = unordered_map<string, string>;
 
 namespace jnp1 {
   unordered_map<unsigned long, dict_t>& dicts() {
-    //TODO czy warto tu spacje po dicts ???
-    static unordered_map<unsigned long, dict_t> dicts ( {{dict_global(), dict_t()}} );
+    static unordered_map<unsigned long, dict_t> dicts( {{dict_global(), dict_t()}} );
     return dicts;
   }
+  
   unsigned long dict_new() {
     static unsigned long id_for_new_dict = 1;
 
@@ -99,7 +99,7 @@ namespace jnp1 {
 
     if (key == NULL ||  value == NULL) {
       if (debug)
-        cerr << "dict_insert: attempt to insert to dict " << id 
+        cerr << "dict_insert: attempt to insert to dict " << id
              << " NULL key or value\n";
 
       return;
@@ -147,7 +147,7 @@ namespace jnp1 {
         }
       }
       else if (debug) {
-        cerr << "dict_remove: dict " << id << ", key " << string(key) 
+        cerr << "dict_remove: dict " << id << ", key " << string(key)
              << " not found\n";
       }
     }
@@ -198,7 +198,6 @@ namespace jnp1 {
     }
     else {
       if (debug) {
-        //TODO jak to przeniesc???
         cerr << "dict_find: key " << string(key) << " in the Global Dictionary"
              << " has value " << foundIter -> second << "\n";
       }
@@ -231,7 +230,6 @@ namespace jnp1 {
     auto dst_dict = dicts().find(dst_id), src_dict = dicts().find(src_id);
 
     if (dst_dict != dicts().end()) {
-      // TODO czy 80 to max przeciez tu to jedynie 2 symbole ktore nie wolno osobno przeniesc, a jak przeniesiemy to mniej czytelne
       /*
        * zmienna logiczna ktora słuzy do sprawdzenia warunku przy kopiowaniu do
        * słownika globalnego, dba o nieprzepelnienie słownika globalnego
@@ -245,7 +243,6 @@ namespace jnp1 {
            * nie uzywamy funkcji dict_insert gdyz, spowoduje to ponowne
            * wyszukanie iteratora, co skutkuje pogorszeniem efektywnosci kodu
            */
-          // TODO jak to mam przeniesc ??? czy tak jest ok??
           dst_dict -> second.insert(make_pair<string,string>(
             string(key_value_pair.first), string(key_value_pair.second)));
         }

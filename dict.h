@@ -10,7 +10,7 @@
 
 #ifdef __cplusplus
 namespace jnp1 {
-extern "C" { //TODO CZY TU POWINNY BYĆ JAKIEŚ WCIĘCIA?
+extern "C" {
 #endif
 
 unsigned long dict_new();
