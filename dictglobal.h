@@ -13,18 +13,18 @@ namespace jnp1 {
 extern "C" {
 #endif
 
+/*
+  Zwraca identyfikator globalnego słownika, którego nie można usunąć.
+*/
 unsigned long dict_global();
-/*
-    Zwraca identyfikator globalnego słownika, którego nie można usunąć.
-*/
 
-const size_t MAX_GLOBAL_DICT_SIZE = 42;
 /*
-    Stała określa maksymalny rozmiar globalnego słownika.
-    Do globalnego słownika można wstawiać kolejne klucze z wartościami tylko,
-    gdy jego rozmiar po wstawieniu nie będzie przekraczał maksymalnego
-    rozmiaru.
+  Stała określa maksymalny rozmiar globalnego słownika.
+  Do globalnego słownika można wstawiać kolejne klucze z wartościami tylko,
+  gdy jego rozmiar po wstawieniu nie będzie przekraczał maksymalnego
+  rozmiaru.
 */
+const size_t MAX_GLOBAL_DICT_SIZE = 42;
 
 #ifdef __cplusplus
 } // extern "C"

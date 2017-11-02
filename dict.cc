@@ -39,7 +39,9 @@ namespace jnp1 {
       cerr << "dict_new()\n";
     /*
      * Sprawdzamy, czy id_for_new_dict nie przekroczyło maksymalnej wartości dla
-     * unsigned long.
+     * unsigned long - oznacza to brak miejsca na nowe słowniki.
+     * Jednocześnie zapewnia poprawność identyfikatora słownika globalnego,
+     * który wynosi 0, bo id_for_new_dict nie będzie mogło osiągnąć wartości 0.
      */
     assert(id_for_new_dict != 0);
 
