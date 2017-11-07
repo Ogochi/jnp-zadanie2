@@ -1,9 +1,9 @@
-## jnp-zadanie2
+# jnp-zadanie2
 Project done as a part of subject **Languages and Tools for Programming I** by:
   * @michal-olt
   * @blazej24
   * @MarianDabrowski
-# Task description
+## Task description
 
 The standard C ++ library provides very useful containers (eg.
 unordered_map) that are not availabe in the C language.
@@ -12,7 +12,7 @@ We often need to combine the C++ code with the inherited code written in pure C.
 is to write two C++ modules that support key-value dictionaries
 operating on strings so that they can be used inside C code.
 
-# Modules
+### Modules
 
 Each module consists of a header file (with extension h) and a file
 with implementation (with cc extension).
@@ -57,7 +57,7 @@ Also prepare the cdict and cdictglobal header files that they contain
 dict and dictglobal module interfaces in the jnp1 namespace
 (For C++ usage).
 
-# Technical details
+### Technical details
 
 Expected solution should use containers and methods provided
 by the standard C++ library. Do not define your own structures or
@@ -67,7 +67,7 @@ std::unordered_map <std::string, std::string>.
 You must hide all global variables and functions from the outside world!
 Do not overuse conditional builds!
 
-# Formal requirements
+### Formal requirements
 
 The solution shall be placed
 in the SVN repository in the directory
