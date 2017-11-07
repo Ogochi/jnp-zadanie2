@@ -1,5 +1,6 @@
 ## jnp-zadanie2
-Project done as a part of subject **Languages and Tools for Programming I** with:
+Project done as a part of subject **Languages and Tools for Programming I** by:
+  * @michal-olt
   * @blazej24
   * @MarianDabrowski
 # Task description
