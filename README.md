@@ -1,8 +1,8 @@
 # jnp-zadanie2
 Project done as a part of subject **Languages and Tools for Programming I** by:
-  * @michal-olt
-  * @blazej24
-  * @MarianDabrowski
+  * [@Ogochi](https://github.com/Ogochi)
+  * [@blazej24](https://github.com/blazej24)
+  * [@MarianDabrowski](https://github.com/MarianDabrowski)
 ## Task description
 
 The standard C ++ library provides very useful containers (eg.
